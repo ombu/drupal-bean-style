@@ -26,5 +26,19 @@ function hook_bean_styles() {
 }
 
 /**
+ * Alter bean build after bean style processing.
+ *
+ * @param array $build
+ *   Build array for bean.
+ * @param array $context
+ *   Context of style. Includes the following elements:
+ *     - bean: the bean being displayed.
+ *     - style: the bean style object.
+ */
+function hook_bean_style_alter(&$build, $context) {
+
+}
+
+/**
  * @} End of "addtogroup hooks".
  */
