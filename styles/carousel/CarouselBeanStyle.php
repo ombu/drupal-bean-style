@@ -6,8 +6,8 @@
  */
 
 class CarouselBeanStyle extends ListBeanStyle {
+  protected $type = 'carousel';
   protected $theme_function = 'bean_style_carousel';
-
   protected $display_mode = 'grid';
 
   /**
