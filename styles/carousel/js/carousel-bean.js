@@ -61,7 +61,7 @@
     // of the total bean width.  This will be used to reposition the
     // list element so that the first active item aligns with the left
     // edge of the grid.
-    this.widthInactive = (0.8 * 1 / this.numVisible) * 100;
+    this.widthInactive = (1 / this.numVisible) * 100;
 
     // Activate the initial item.
     this.activateItem(this.$bean.attr('data-index-active'));
@@ -119,9 +119,5 @@
       this.$bean.removeClass('at-end');
     }
   }
-
-  // jQuery(window).on('swipeleft', function(e) {
-  //   alert('Swiped left');
-  // });
 
 })(jQuery);

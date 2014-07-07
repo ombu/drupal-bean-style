@@ -119,6 +119,14 @@ function bean_style_theme($existing, $type, $theme, $path) {
       ),
       'file' => 'styles/list/theme.inc',
     ),
+    'bean_style_grid' => array(
+      'variables' => array(
+        'items' => NULL,
+        'type' => 'grid',
+        'per_row' => 5,
+      ),
+      'file' => 'styles/grid/theme.inc',
+    ),
     'bean_style_carousel' => array(
       'variables' => array(
         'items' => NULL,
@@ -209,12 +217,30 @@ function bean_style_bean_update($bean) {
 }
 
 /**
+ * Implements hook_entity_info_alter().
+ *
+ * Provide new view modes for provided styles.
+ */
+function bean_style_entity_info_alter(&$info) {
+  $info['node']['view modes']['grid'] = array(
+    'label' => t('Grid'),
+    'custom settings' => TRUE,
+  );
+}
+
+/**
  * Alter bean build to pass rendering to bean style.
  */
 function bean_style_view_alter(&$build, $bean) {
   $style = bean_style_bean_load_style($bean->bid);
   if ($style && $style->getStyle()) {
     $build['bean'][$bean->delta] = $style->getStyle()->prepareView($build['bean'][$bean->delta], $bean);
+
+    $context = array(
+      'bean' => $bean,
+      'style' => $style,
+    );
+    drupal_alter('bean_style_view', $build['bean'][$bean->delta], $context);
   }
 }
 

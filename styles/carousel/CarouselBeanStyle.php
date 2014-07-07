@@ -6,8 +6,8 @@
  */
 
 class CarouselBeanStyle extends ListBeanStyle {
+  protected $type = 'carousel';
   protected $theme_function = 'bean_style_carousel';
-
   protected $display_mode = 'grid';
 
   /**
@@ -32,8 +32,8 @@ class CarouselBeanStyle extends ListBeanStyle {
   /**
    * Implements parent::prepareItems().
    */
-  public function prepareItems($build, $bean) {
-    parent::prepareItems($build, $bean);
+  public function prepareItems($build, $type) {
+    parent::prepareItems($build, $type);
 
     // Build items differently depending on bean type.
     switch ($type) {

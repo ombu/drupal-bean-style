@@ -7,6 +7,11 @@
 
 class ListBeanStyle extends BeanStyle {
   /**
+   * Type of style to pass to theme function.
+   */
+  protected $type = 'list';
+
+  /**
    * Theme function for list view.
    */
   protected $theme_function = 'bean_style_list';
@@ -18,6 +23,7 @@ class ListBeanStyle extends BeanStyle {
 
   /**
    * Items used to render into list style.
+   * 
    */
   protected $items = array();
 
@@ -31,12 +37,14 @@ class ListBeanStyle extends BeanStyle {
       case 'solr_bean':
         $build['search']['search_results']['#theme'] = $this->theme_function;
         $build['search']['search_results']['#items'] = $this->items;
+        $build['search']['search_results']['#type']  = $this->type;
         $build['search']['#weight'] = -1;
         break;
 
       case 'featuredbean':
         $build['field_featured_content']['#theme'] = $this->theme_function;
         $build['field_featured_content']['#items'] = $this->items;
+        $build['field_featured_content']['#type']  = $this->type;
         break;
     }
 
