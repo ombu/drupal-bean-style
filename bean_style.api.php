@@ -13,7 +13,7 @@
 /**
  * Register new styles for beans.
  */
-function hook_bean_styles() {
+function hook_bean_style_info() {
   return array(
     'style_type' => array(
       'label'          => 'My Bean Style',
