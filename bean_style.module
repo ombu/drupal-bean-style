@@ -214,6 +214,12 @@ function bean_style_bean_update($bean) {
       $bean_style->save();
     }
   }
+  else {
+    $bean_style = bean_style_bean_load_style($bean->bid);
+    if ($bean_style) {
+      entity_delete('bean_style', $bean_style->bean_style_id);
+    }
+  }
 }
 
 /**
