@@ -39,6 +39,15 @@ class ListBeanStyle extends BeanStyle {
         $build['search']['search_results']['#items'] = $this->items;
         $build['search']['search_results']['#type']  = $this->type;
         $build['search']['#weight'] = -1;
+
+        // Add pager if selected for solr bean.
+        if (!empty($bean->settings['pager'])) {
+          $build['search']['pager'] = array(
+            '#theme' => 'pager',
+            '#element' => $bean->settings['pager_element'],
+            '#weight' => 100,
+          );
+        }
         break;
 
       case 'featuredbean':
