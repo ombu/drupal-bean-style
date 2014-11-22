@@ -31,6 +31,16 @@ function bean_style_bean_style_info() {
       'bean_types'     => array(
         'solr_bean',
         'featuredbean',
+        'ombubeans_popular_content',
+      ),
+    ),
+    'linked_list' => array(
+      'label'          => 'Linked list',
+      'class'          => 'LinkedListBeanStyle',
+      'bean_types'     => array(
+        'solr_bean',
+        'featuredbean',
+        'ombubeans_popular_content',
       ),
     ),
     'carousel' => array(
