@@ -31,6 +31,8 @@ class ListBeanStyle extends BeanStyle {
    * Implements parent::prepareView().
    */
   public function prepareView($build, $bean) {
+    $this->items = array();
+
     parent::prepareView($build, $bean);
 
     switch ($bean->type) {
