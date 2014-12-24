@@ -55,34 +55,40 @@ function theme_bean_style_slideshow($variables) {
   $pager = '<ul id="' . $id_pager . '" class="pager">' . $pager . '</ul>';
   $prevnext = '<ul id="' . $id_prevnext . '" class="prevnext"><li class="prev"><a href="#"><span>&lsaquo;</span></a></li><li class="next"><a href="#"><span>&rsaquo;</span></a></li></ul>';
 
-  // Add unique id, classes, and assemble final output.
-  $id = drupal_html_id('ombuslide');
-  $classes = 'ombuslide ombuslide-slideshow ombuslide-' . $variables['type'];
-  $output = '<div id="' . $id . '" class="' . $classes . '" data-slide-count="' . $num . '">' . $slides . $prevnext . $pager . '</div>';
-
-  // Add js.
-  $path = drupal_get_path('module', 'bean_style') . '/styles/slideshow';
-  drupal_add_js($path . '/js/jquery.cycle2.js');
-  drupal_add_js($path . '/js/slideshow.js');
-  drupal_add_js(array('slideshow' => array($id_slides => array())), 'setting');
+  $attributes = array(
+    'id' => $id_slides,
+    'class' => array(
+      'ombuslide',
+      'ombuslide-slideshow',
+      'ombuslide-' . $variables['type'],
+    ),
+    'data-slide-count' => $num,
+  );
 
   // Default values. These are overriden by those from the formatter settings
   // form.  See available options at http://jquery.malsup.com/cycle2/api/
   $opts = array(
     'timeout' => 6000,
-    'slides' => ' > li',
+    'slides' => '> li',
     'autoHeight' => 'calc',
-    'prev' => '#' . $id_prevnext . ' > .prev > a',
-    'next' => '#' . $id_prevnext . ' > .next > a',
-    'pager' => '#' . $id_pager,
+    'prev' => '#' . $id_slides . ' .prevnext > .prev > a',
+    'next' => '#' . $id_slides . ' .prevnext > .next > a',
+    'pager' => '#' . $id_slides . ' .pager',
     'pagerTemplate' => '',
     'speed' => 600,
     'manualSpeed' => 600,
     'fx' => 'scrollHorz',
-    'hideNonActive' => false
+    'hideNonActive' => TRUE,
   );
+  $attributes['data-ombuslide-settings'] = json_encode($opts);
 
-  drupal_add_js(array('slideshow' => array($id_slides => $opts)), 'setting');
+  $output = '<div ' . drupal_attributes($attributes) . '>' . $slides . $prevnext . $pager . '</div>';
+
+  // Add js.
+  $path = drupal_get_path('module', 'bean_style') . '/styles/slideshow';
+  drupal_add_js($path . '/js/jquery.cycle2.js');
+  drupal_add_js($path . '/js/slideshow.js');
+
   drupal_add_css($path . '/css/slideshow.css');
 
   return $output;
