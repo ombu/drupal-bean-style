@@ -74,7 +74,7 @@ function bean_style_bean_style_options_alter(&$options, $context) {
     // Remove boostrap_slideshow style if bootstrap theme isn't loaded, since
     // theme is required for correct markup.
     if (variable_get('theme_default', '') != 'bootstrap') {
-      unset($options[array_search('bootstrap_slideshow', $options)]);
+      unset($options['bootstrap_slideshow']);
     }
   }
 }
