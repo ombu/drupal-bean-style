@@ -77,4 +77,8 @@ function bean_style_bean_style_options_alter(&$options, $context) {
       unset($options['bootstrap_slideshow']);
     }
   }
+  elseif ($context['bundle'] == 'featuredbean') {
+    // Remove default option for featured bean.
+    unset($options['']);
+  }
 }
