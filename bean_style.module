@@ -105,6 +105,13 @@ function bean_style_hook_info() {
  */
 function bean_style_theme($existing, $type, $theme, $path) {
   return array(
+    'bean_style_bootstrap_slideshow' => array(
+      'variables' => array(
+        'items' => NULL,
+        'type' => NULL,
+      ),
+      'file' => 'styles/bootstrap_slideshow/theme.inc',
+    ),
     'bean_style_slideshow' => array(
       'variables' => array(
         'items' => NULL,
@@ -334,6 +341,26 @@ function bean_style_get_styles() {
     // Allow other modules to alter bean styles.
     drupal_alter('bean_style', $styles);
   }
+
+  return $styles;
+}
+
+/**
+ * Implements hook_image_default_styles().
+ */
+function bean_style_image_default_styles() {
+  $styles = array();
+
+  $styles['bootstrap_slideshow'] = array(
+    'label' => 'Bootstrap Slideshow',
+    'effects' => array(
+      array(
+        'name' => 'image_scale_and_crop_center',
+        'data' => array('width' => 1200, 'height' => 600, 'upscale' => 0),
+        'weight' => 0,
+      ),
+    ),
+  );
 
   return $styles;
 }

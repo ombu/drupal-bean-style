@@ -12,4 +12,6 @@ files[] = includes/BeanStyleEntity.php
 files[] = styles/carousel/CarouselBeanStyle.php
 files[] = styles/grid/GridBeanStyle.php
 files[] = styles/list/ListBeanStyle.php
+files[] = styles/linked_list/LinkedListBeanStyle.php
 files[] = styles/slideshow/SlideshowBeanStyle.php
+files[] = styles/bootstrap_slideshow/BootstrapSlideshowBeanStyle.php

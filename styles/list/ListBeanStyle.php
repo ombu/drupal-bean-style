@@ -31,6 +31,8 @@ class ListBeanStyle extends BeanStyle {
    * Implements parent::prepareView().
    */
   public function prepareView($build, $bean) {
+    $this->items = array();
+
     parent::prepareView($build, $bean);
 
     switch ($bean->type) {
@@ -55,6 +57,12 @@ class ListBeanStyle extends BeanStyle {
         $build['field_featured_content']['#items'] = $this->items;
         $build['field_featured_content']['#type']  = $this->type;
         break;
+
+      default:
+        $build['nodes']['#theme'] = $this->theme_function;
+        $build['nodes']['#items'] = $this->items;
+        $build['nodes']['#type']  = $this->type;
+        break;
     }
 
     return $build;
@@ -73,6 +81,21 @@ class ListBeanStyle extends BeanStyle {
       case 'featuredbean':
         $this->prepareFeaturedItems($build);
         break;
+
+      default:
+        $this->prepareNodeItems($build);
+        break;
+    }
+  }
+
+  /**
+   * Build items for list.
+   */
+  protected function prepareNodeItems($build) {
+    if (isset($build['#nodes'])) {
+      foreach ($build['#nodes'] as $node) {
+        $this->items[] = node_view($node, $this->display_mode);
+      }
     }
   }
 
