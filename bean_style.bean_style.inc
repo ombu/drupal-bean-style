@@ -48,6 +48,7 @@ function bean_style_bean_style_info() {
         'solr_bean',
         'featuredbean',
         'ombubeans_popular_content',
+        'ombublog_list',
       ),
     ),
     'carousel' => array(
