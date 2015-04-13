@@ -12,7 +12,7 @@ class LinkedListBeanStyle extends ListBeanStyle {
   protected function prepareNodeItems($build) {
     if (isset($build['#nodes'])) {
       foreach ($build['#nodes'] as $node) {
-        $this->items[] = $this->prepareLinkTheme('node/' . $node->nid, $node->title);
+        $this->items[] = $this->prepareLinkTheme('node/' . $node->nid, $node->title, 'node', $node);
       }
     }
   }
@@ -22,7 +22,7 @@ class LinkedListBeanStyle extends ListBeanStyle {
    */
   protected function prepareFeaturedItems($build) {
     foreach ($build['#featured_content'] as $content) {
-      $this->items[] = $this->prepareLinkTheme('node/' . $content['entity']->nid, $content['entity']->title);
+      $this->items[] = $this->prepareLinkTheme('node/' . $content['entity']->nid, $content['entity']->title, 'featured', $build['entity']);
     }
   }
 
@@ -32,7 +32,7 @@ class LinkedListBeanStyle extends ListBeanStyle {
   protected function prepareSolrItems($build) {
     if (!empty($build['search']['search_results']['#results'])) {
       foreach ($build['search']['search_results']['#results'] as $result) {
-        $this->items[] = $this->prepareLinkTheme('node/' . $result['fields']['entity_id'], $result['title']);
+        $this->items[] = $this->prepareLinkTheme('node/' . $result['fields']['entity_id'], $result['title'], 'solr', $result);
       }
     }
   }
@@ -40,15 +40,12 @@ class LinkedListBeanStyle extends ListBeanStyle {
   /**
    * Build link theme array.
    */
-  protected function prepareLinkTheme($path, $title) {
+  protected function prepareLinkTheme($path, $title, $type, $entity) {
     return array(
-      '#theme' => 'link',
+      '#theme' => array('bean_style_linked_list_link__' . $type, 'bean_style_linked_list_link'),
+      '#entity' => $entity,
       '#text' => $title,
       '#path' => $path,
-      '#options' => array(
-        'html' => FALSE,
-        'attributes' => array(),
-      ),
     );
   }
 }
