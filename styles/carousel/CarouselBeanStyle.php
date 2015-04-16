@@ -23,6 +23,7 @@ class CarouselBeanStyle extends ListBeanStyle {
           '#theme' => $this->theme_function,
           '#items' => $this->items,
         );
+        unset($build['nodes']);
         break;
     }
 
