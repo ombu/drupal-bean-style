@@ -16,6 +16,17 @@ function theme_bean_style_carousel(&$variables) {
 
   // Add the carousel items to a list array.
   foreach ($items as $item) {
+    $fid = key($item['entity']['field_collection_item']);
+
+    $build =& $item['entity']['field_collection_item'][$fid];
+
+    // Wrap images in link if present.
+    $link = field_get_items('field_collection_item', $build['#entity'], 'field_link');
+    if ($link) {
+      $build['field_image']['#prefix'] = '<a href="' . $link[0]['url'] . '">';
+      $build['field_image']['#suffix'] = '</a>';
+    }
+
     $list_items[] = array('data' => drupal_render($item));
   }
 
