@@ -9,6 +9,7 @@ class CarouselBeanStyle extends ListBeanStyle {
   protected $type = 'carousel';
   protected $theme_function = 'bean_style_carousel';
   protected $display_mode = 'grid';
+  protected $image_style = 'bootstrap_slideshow';
 
   /**
    * Implements parent::prepareView().
@@ -42,13 +43,6 @@ class CarouselBeanStyle extends ListBeanStyle {
         $this->prepareFieldCollectionItems($build);
         break;
     }
-
-    // Change image style to carousel.
-    foreach ($this->items as $key => $item) {
-      if (isset($item['field_image'])) {
-        $this->items[$key]['field_image'][0]['#image_style'] = 'carousel';
-      }
-    }
   }
 
   /**
@@ -56,6 +50,19 @@ class CarouselBeanStyle extends ListBeanStyle {
    */
   protected function prepareFieldCollectionItems($build) {
     foreach (element_children($build['field_slide']) as $delta) {
+      $fid = key($build['field_slide'][$delta]['entity']['field_collection_item']);
+      $item =& $build['field_slide'][$delta]['entity']['field_collection_item'][$fid];
+
+      if (isset($item['field_image'])) {
+        $item['field_image'][0]['#image_style'] = $this->image_style;
+      }
+
+      $link = field_get_items('field_collection_item', $item['#entity'], 'field_link');
+      if ($link) {
+        $item['field_image'][0]['#prefix'] = '<a href="' . $link[0]['url'] . '">';
+        $item['field_image'][0]['#suffix'] = '</a>';
+      }
+
       $this->items[] = $build['field_slide'][$delta];
     }
   }
