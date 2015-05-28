@@ -10,7 +10,7 @@
  */
 function theme_bean_style_carousel(&$variables) {
 
-  // Add theme assets.
+  // Add bean style assets.
   $path = drupal_get_path('module', 'bean_style') . '/styles/carousel';
   drupal_add_js($path . '/js/bean-style-carousel.js');
   drupal_add_js($path . '/js/vendor/owl.carousel.js');
