@@ -15,6 +15,9 @@
   /*
  *  Owl Carousel - Video Plugin
  */
+  margin-left: -15px;
+  margin-right: -15px;
+  margin-bottom: 2.0em;
 }
 [data-module="bean"].carousel > .entity > .content .owl-carousel .animated {
   -webkit-animation-duration: 1000ms;
@@ -208,6 +211,76 @@
   position: relative;
   z-index: 1;
 }
-[data-module="bean"].carousel > .entity > .content .owl-controls {
+[data-module="bean"].carousel > .entity > .content a {
+  outline: 0;
+}
+[data-module="bean"].carousel > .entity > .content .owl-nav,
+[data-module="bean"].carousel > .entity > .content .owl-dots {
   display: none;
+}
+[data-module="bean"].carousel > .entity > .content .owl-prev,
+[data-module="bean"].carousel > .entity > .content .owl-next {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  text-indent: -9999999px;
+  cursor: pointer;
+}
+[data-module="bean"].carousel > .entity > .content .owl-prev:before,
+[data-module="bean"].carousel > .entity > .content .owl-next:before {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+[data-module="bean"].carousel > .entity > .content .owl-prev:after,
+[data-module="bean"].carousel > .entity > .content .owl-next:after {
+  content: '◀';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  margin-top: -0.5em;
+  font-size: 20px;
+  line-height: 1;
+  text-align: center;
+  text-indent: 0;
+  visibility: visible;
+  opacity: 1;
+}
+[data-module="bean"].carousel > .entity > .content .owl-prev {
+  right: 100%;
+}
+[data-module="bean"].carousel > .entity > .content .owl-next {
+  left: 100%;
+}
+[data-module="bean"].carousel > .entity > .content .owl-next:after {
+  content: '▶';
+}
+[data-module="bean"].carousel > .entity > .content .at-start .owl-prev,
+[data-module="bean"].carousel > .entity > .content .at-end .owl-next {
+  cursor: default !important;
+}
+[data-module="bean"].carousel > .entity > .content .at-start .owl-prev:after,
+[data-module="bean"].carousel > .entity > .content .at-end .owl-next:after {
+  visibility: hidden;
+  opacity: 0;
+}
+@media (min-width: 768px) {
+  [data-module="bean"].carousel > .entity > .content {
+    margin-left: -60px;
+    margin-right: -60px;
+  }
+}
+@media (min-width: 992px) {
+  [data-module="bean"].carousel > .entity > .content {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  [data-module="bean"].carousel > .entity > .content .owl-nav {
+    display: block;
+  }
 }

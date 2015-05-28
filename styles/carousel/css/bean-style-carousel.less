@@ -1,11 +1,100 @@
+// CONSTANTS
+// ----------------------------------------------------------------------------
+@gutter-side-mobile: 15px;
+@gutter-side-tablet: 60px;
+@gutter-side-desktop: 80px;
+@owl-nav-width: 40px;
+
 // BEAN STYLES
 // ----------------------------------------------------------------------------
 
 [data-module="bean"].carousel > .entity > .content {
-
   @import (less) 'vendor/owl.carousel.css';
+  margin-left: -1 * @gutter-side-mobile;
+  margin-right: -1 * @gutter-side-mobile;
+  margin-bottom: 2.0em;
 
-  .owl-controls {
+  a {
+    outline: 0;
+  }
+
+  .owl-nav, .owl-dots {
     display: none;
+  }
+
+  .owl-prev, .owl-next {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: @owl-nav-width;
+    text-indent: -9999999px;
+    cursor: pointer;
+
+    &:before {
+      position: absolute;
+      content: '';
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    &:after {
+      content: '◀';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      margin-top: -0.5em;
+      font-size: 20px;
+      line-height: 1;
+      text-align: center;
+      text-indent: 0;
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  .owl-prev {
+    right: 100%;
+  }
+
+  .owl-next {
+    left: 100%;
+
+    &:after {
+      content: '▶';
+    }
+  }
+
+  .at-start .owl-prev,
+  .at-end .owl-next {
+    cursor: default !important;
+
+    &:after {
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+}
+
+// MEDIA RESPONSES
+// ----------------------------------------------------------------------------
+
+@media (min-width: 768px) {
+  [data-module="bean"].carousel > .entity > .content {
+    margin-left: -1 * @gutter-side-tablet;
+    margin-right: -1 * @gutter-side-tablet;
+  }
+}
+
+@media (min-width: 992px) {
+  [data-module="bean"].carousel > .entity > .content {
+    margin-left: 0;
+    margin-right: 0;
+
+    .owl-nav {
+      display: block;
+    }
   }
 }

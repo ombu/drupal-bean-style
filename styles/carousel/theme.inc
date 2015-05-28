@@ -17,10 +17,10 @@ function theme_bean_style_carousel(&$variables) {
   drupal_add_css($path . '/css/bean-style-carousel.css');
 
   // Set data options for Owl Carousel initialization.
-  $options  = ' data-items="1"';
+  $options  = ' data-items="3"';
   $options .= ' data-items-480="4"';
   $options .= ' data-items-768="5"';
-  $options .= ' data-items-1024="6"';
+  $options .= ' data-items-992="6"';
 
   // Render markup for collection of items.
   $list = '<div class="items"' . $options . '>';
