@@ -3,7 +3,7 @@
   Drupal.behaviors.beanStyleCarousel = {
     attach: function(context, settings) {
       // Instantiate this bean.
-      new Drupal.beanStyleCarousel($('[data-module="bean"].carousel', context));
+      new Drupal.beanStyleCarousel($('.bean-style-carousel', context));
     }
   };
 
@@ -12,7 +12,7 @@
     // Get assorted handles.
     var obj = this;
     this.$bean = $bean;
-    this.$items = $('> .entity > .content > .items', this.$bean);
+    this.$items = $('> .items', this.$bean);
 
     // On Owl Carousel initialization and change events, determine position and
     // set bean classes to configure visibility of previous and next arrows.
@@ -52,7 +52,7 @@
         768: {
           items: this.$items.attr('data-items-768') || 5,
           margin: this.$items.attr('data-margin-768') || 20,
-          stagePadding: this.$items.attr('data-stage-padding-768') || 80,
+          stagePadding: this.$items.attr('data-stage-padding-768') || 60,
         },
         992: {
           items: this.$items.attr('data-items-992') || 6,
