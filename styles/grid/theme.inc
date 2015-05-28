@@ -9,27 +9,19 @@
  * Theme grid style.
  */
 function theme_bean_style_grid($variables) {
-  $grid_cols = 12;
-  $items = $variables['items'];
-  $type = !empty($variables['type']) ? $variables['type'] : 'grid';
-  $per_row = !empty($variables['per_row']) ? $variables['per_row'] : 5;
 
-  $items = array_chunk($items, $per_row);
-  $col_classes = drupal_html_class('col-xs-' . str_replace('.', '-', $grid_cols / $per_row));
-  $col_classes .= ' ' . drupal_html_class('col-xs-' . $grid_cols . '-' . $per_row);
-  $rows = '';
-  foreach ($items as $i => $row_items) {
-    $rows .= '<div class="row">';
-    foreach ($row_items as $item) {
-      $rows .= '<div class="col-xs-1 ' . $col_classes . '">';
-      $rows .= drupal_render($item);
-      $rows .= '</div>';
-    }
-    $rows .= '</div>';
-  }
-
+  // Add bean style assets.
   $path = drupal_get_path('module', 'bean_style') . '/styles/grid';
-  drupal_add_css($path . '/css/grid.css');
+  drupal_add_css($path . '/css/bean-style-grid.css');
 
-  return '<div class="bean-style-' . $type . '"><div class="bean-style-inner">' . $rows. '</div></div>';
+  // Render markup for collection of items.
+  $list  = '<div class="bean-style-grid">';
+  $list .= '<ul class="items">';
+  foreach ($variables['items'] as $item) {
+    $render = array('data' => drupal_render($item));
+    $list .= '<li class="item">' . $render['data'] . '</li>';
+  }
+  $list .= "</ul></div>";
+
+  return $list;
 }
