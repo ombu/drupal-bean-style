@@ -16,7 +16,7 @@
 
     // On Owl Carousel initialization and change events, determine position and
     // set bean classes to configure visibility of previous and next arrows.
-    this.$bean.on('change.owl.carousel initialized.owl.carousel', function(e) {
+    this.$bean.on('change.owl.carousel refreshed.owl.carousel', function(e) {
       var $items = $(e.target).find('.owl-item');
       var numVisible = parseInt(e.page.size);
       var indexCurrent = e.hasOwnProperty('property') ? parseInt(e.property.value) : 0;
