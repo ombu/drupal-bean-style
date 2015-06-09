@@ -23,6 +23,7 @@ class CarouselBeanStyle extends ListBeanStyle {
         $build['field_slide'] = array(
           '#theme' => $this->theme_function,
           '#items' => $this->items,
+          '#type' => $this->type,
         );
         unset($build['nodes']);
         break;
