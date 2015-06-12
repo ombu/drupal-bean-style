@@ -68,6 +68,7 @@
       var $owlItem = $(this).closest('.owl-item');
       if (!$owlItem.hasClass('active')) {
         e.preventDefault();
+        e.stopPropagation();
         var trigger = $owlItem.next().hasClass('active') ? 'prev' : 'next';
         obj.owl.trigger(trigger + '.owl.carousel');
       }
