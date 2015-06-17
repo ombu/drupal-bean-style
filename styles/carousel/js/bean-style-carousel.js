@@ -3,7 +3,7 @@
   Drupal.behaviors.beanStyleCarousel = {
     attach: function(context, settings) {
       // Instantiate this bean.
-      new Drupal.beanStyleCarousel($('.bean-style-carousel', context));
+      new Drupal.beanStyleCarousel($('[data-type="block"]:not(.no-behaviors) .bean-style-carousel', context));
     }
   };
 
