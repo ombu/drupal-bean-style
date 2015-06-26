@@ -1,0 +1,100 @@
+// CONSTANTS
+// ----------------------------------------------------------------------------
+@bsc-gutter-side-mobile: 15px;
+@bsc-gutter-side-tablet: 60px;
+@bsc-gutter-side-desktop: 80px;
+@bsc-owl-nav-width: 40px;
+
+// BEAN STYLES
+// ----------------------------------------------------------------------------
+
+.bean-style-carousel {
+  @import (less) 'vendor/owl.carousel.css';
+  margin-left: -1 * @bsc-gutter-side-mobile;
+  margin-right: -1 * @bsc-gutter-side-mobile;
+  margin-bottom: 2.0em;
+
+  a {
+    outline: 0;
+  }
+
+  .owl-nav, .owl-dots {
+    display: none;
+  }
+
+  .owl-prev, .owl-next {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: @bsc-owl-nav-width;
+    text-indent: -9999999px;
+    cursor: pointer;
+
+    &:before {
+      position: absolute;
+      content: '';
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    &:after {
+      content: '◀';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      margin-top: -0.5em;
+      font-size: 20px;
+      line-height: 1;
+      text-align: center;
+      text-indent: 0;
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  .owl-prev {
+    right: 100%;
+  }
+
+  .owl-next {
+    left: 100%;
+
+    &:after {
+      content: '▶';
+    }
+  }
+
+  .at-start .owl-prev,
+  .at-end .owl-next {
+    cursor: default !important;
+
+    &:after {
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+}
+
+// MEDIA RESPONSES
+// ----------------------------------------------------------------------------
+
+@media (min-width: 768px) {
+  .bean-style-carousel {
+    margin-left: -1 * @bsc-gutter-side-tablet;
+    margin-right: -1 * @bsc-gutter-side-tablet;
+  }
+}
+
+@media (min-width: 992px) {
+  .bean-style-carousel {
+    margin-left: 0;
+    margin-right: 0;
+
+    .owl-nav {
+      display: block;
+    }
+  }
+}

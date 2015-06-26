@@ -126,6 +126,16 @@ function bean_style_theme($existing, $type, $theme, $path) {
       ),
       'file' => 'styles/list/theme.inc',
     ),
+    'bean_style_linked_list_link' => array(
+      'variables' => array(
+        'type' => NULL,
+        'entity' => NULL,
+        'text' => NULL,
+        'path' => NULL,
+      ),
+      'file' => 'styles/linked_list/theme.inc',
+      'pattern' => 'bean_style_linked_list_link__',
+    ),
     'bean_style_grid' => array(
       'variables' => array(
         'items' => NULL,
@@ -137,7 +147,7 @@ function bean_style_theme($existing, $type, $theme, $path) {
     'bean_style_carousel' => array(
       'variables' => array(
         'items' => NULL,
-        'type' => NULL,
+        'type' => 'carousel',
       ),
       'file' => 'styles/carousel/theme.inc',
     ),
