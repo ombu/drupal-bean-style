@@ -2,8 +2,13 @@
 
   Drupal.behaviors.beanStyleCarousel = {
     attach: function(context, settings) {
-      // Instantiate this bean.
-      new Drupal.beanStyleCarousel($('[data-type="block"]:not(.no-behaviors) .bean-style-carousel', context));
+      // Get handle to carousel bean instances.
+      $carousels = $('[data-type="block"]:not(.no-behaviors) .bean-style-carousel', context);
+
+      // Instantiate each bean.
+      $carousels.each(function(i, el) {
+        new Drupal.beanStyleCarousel($(el));
+      });
     }
   };
 
