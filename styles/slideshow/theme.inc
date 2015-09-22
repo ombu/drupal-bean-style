@@ -8,7 +8,7 @@
 /**
  * Theme callback.
  *
- * Themes a field collection as a ombuslide.
+ * Themes a field collection as a ombugallery.
  */
 function theme_bean_style_slideshow($variables) {
   $items = $variables['items'];
@@ -40,9 +40,9 @@ function theme_bean_style_slideshow($variables) {
 
   // Generate the parent list element, the corresponding pager list, and
   // previous/next links.
-  $id_slides = drupal_html_id('ombuslide-slides');
-  $id_pager = drupal_html_id('ombuslide-pager');
-  $id_prevnext = drupal_html_id('ombuslide-prevnext');
+  $id_slides = drupal_html_id('ombugallery-slides');
+  $id_pager = drupal_html_id('ombugallery-pager');
+  $id_prevnext = drupal_html_id('ombugallery-prevnext');
 
   $slides = theme('item_list', array(
     'items' => $items,
@@ -58,9 +58,9 @@ function theme_bean_style_slideshow($variables) {
   $attributes = array(
     'id' => $id_slides,
     'class' => array(
-      'ombuslide',
-      'ombuslide-slideshow',
-      'ombuslide-' . $variables['type'],
+      'ombugallery',
+      'ombugallery-slideshow',
+      'ombugallery-' . $variables['type'],
     ),
     'data-slide-count' => $num,
   );
@@ -80,7 +80,7 @@ function theme_bean_style_slideshow($variables) {
     'fx' => 'scrollHorz',
     'hideNonActive' => TRUE,
   );
-  $attributes['data-ombuslide-settings'] = json_encode($opts);
+  $attributes['data-ombugallery-settings'] = json_encode($opts);
 
   $output = '<div ' . drupal_attributes($attributes) . '>' . $slides . $prevnext . $pager . '</div>';
 

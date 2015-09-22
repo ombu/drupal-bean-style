@@ -19,7 +19,7 @@ class CarouselBeanStyle extends ListBeanStyle {
 
     $type = $this->bean->type;
     switch ($type) {
-      case 'ombuslide':
+      case 'ombugallery':
         $build['field_slide'] = array(
           '#theme' => $this->theme_function,
           '#items' => $this->items,
@@ -40,7 +40,7 @@ class CarouselBeanStyle extends ListBeanStyle {
 
     // Build items differently depending on bean type.
     switch ($type) {
-      case 'ombuslide':
+      case 'ombugallery':
         $this->prepareFieldCollectionItems($build);
         break;
     }

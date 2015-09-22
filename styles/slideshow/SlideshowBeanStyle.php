@@ -30,7 +30,7 @@ class SlideshowBeanStyle extends BeanStyle {
     // fields on the entity.
     $type = $this->bean->type;
     switch ($type) {
-      case 'ombuslide':
+      case 'ombugallery':
         $build['field_slide'] = array(
           '#theme' => $this->theme_function,
           '#items' => $this->items,
@@ -47,7 +47,7 @@ class SlideshowBeanStyle extends BeanStyle {
    */
   protected function prepareItems($build, $type) {
     switch ($type) {
-      case 'ombuslide':
+      case 'ombugallery':
         $this->prepareFieldCollectionItems($build);
         break;
     }

@@ -14,14 +14,14 @@ function bean_style_bean_style_info() {
       'label'          => 'Bootstrap Slider',
       'class'          => 'BootstrapSlideshowBeanStyle',
       'bean_types'     => array(
-        'ombuslide',
+        'ombugallery',
       ),
     ),
     'slideshow' => array(
       'label'          => 'Slider',
       'class'          => 'SlideshowBeanStyle',
       'bean_types'     => array(
-        'ombuslide',
+        'ombugallery',
       ),
     ),
     'grid' => array(
@@ -57,7 +57,7 @@ function bean_style_bean_style_info() {
       'bean_types'     => array(
         'solr_bean',
         'featuredbean',
-        'ombuslide',
+        'ombugallery',
       ),
     ),
   );
@@ -67,7 +67,7 @@ function bean_style_bean_style_info() {
  * Implements hook_bean_style_options_alter().
  */
 function bean_style_bean_style_options_alter(&$options, $context) {
-  if ($context['bundle'] == 'ombuslide') {
+  if ($context['bundle'] == 'ombugallery') {
     // Remove default option for slideshows, since we always want a slideshow
     // style displayed.
     unset($options['']);
