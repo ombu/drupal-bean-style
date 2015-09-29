@@ -9,7 +9,7 @@ class CarouselBeanStyle extends ListBeanStyle {
   protected $type = 'carousel';
   protected $theme_function = 'bean_style_carousel';
   protected $display_mode = 'grid';
-  protected $image_style = '';
+  protected $image_style = FALSE;
 
   /**
    * Constructor.
@@ -17,7 +17,9 @@ class CarouselBeanStyle extends ListBeanStyle {
   public function __construct($info) {
     parent::__construct($info);
 
-    $this->image_style = variable_get('bean_style_carousel_image_style', 'bootstrap_slideshow');
+    if (!$this->image_style) {
+      $this->image_style = variable_get('bean_style_carousel_image_style', 'bootstrap_slideshow');
+    }
   }
 
   /**
