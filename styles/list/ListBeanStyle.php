@@ -52,10 +52,12 @@ class ListBeanStyle extends BeanStyle {
         }
         break;
 
-      case 'featuredbean':
-        $build['field_featured_content']['#theme'] = $this->theme_function;
-        $build['field_featured_content']['#items'] = $this->items;
-        $build['field_featured_content']['#type']  = $this->type;
+      case 'bean_featured':
+        $build['field_featured_content'] = array(
+          '#theme' => $this->theme_function,
+          '#items' => $this->items,
+          '#type'  => $this->type,
+        );
         break;
 
       default:
@@ -78,7 +80,7 @@ class ListBeanStyle extends BeanStyle {
         $this->prepareSolrItems($build);
         break;
 
-      case 'featuredbean':
+      case 'bean_featured':
         $this->prepareFeaturedItems($build);
         break;
 

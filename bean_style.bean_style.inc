@@ -29,7 +29,7 @@ function bean_style_bean_style_info() {
       'class'          => 'GridBeanStyle',
       'bean_types'     => array(
         'solr_bean',
-        'featuredbean',
+        'bean_featured',
       ),
     ),
     'list' => array(
@@ -37,7 +37,7 @@ function bean_style_bean_style_info() {
       'class'          => 'ListBeanStyle',
       'bean_types'     => array(
         'solr_bean',
-        'featuredbean',
+        'bean_featured',
         'ombubeans_popular_content',
       ),
     ),
@@ -46,7 +46,7 @@ function bean_style_bean_style_info() {
       'class'          => 'LinkedListBeanStyle',
       'bean_types'     => array(
         'solr_bean',
-        'featuredbean',
+        'bean_featured',
         'ombubeans_popular_content',
         'ombublog_list',
       ),
@@ -56,7 +56,7 @@ function bean_style_bean_style_info() {
       'class'          => 'CarouselBeanStyle',
       'bean_types'     => array(
         'solr_bean',
-        'featuredbean',
+        'bean_featured',
         'ombugallery',
       ),
     ),
@@ -78,7 +78,7 @@ function bean_style_bean_style_options_alter(&$options, $context) {
       unset($options['bootstrap_slideshow']);
     }
   }
-  elseif ($context['bundle'] == 'featuredbean') {
+  elseif ($context['bundle'] == 'bean_featured') {
     // Remove default option for featured bean.
     unset($options['']);
   }
