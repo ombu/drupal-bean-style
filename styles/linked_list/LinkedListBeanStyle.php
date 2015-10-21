@@ -46,6 +46,7 @@ class LinkedListBeanStyle extends ListBeanStyle {
       '#entity' => $entity,
       '#text' => $title,
       '#path' => $path,
+      '#type' => $type,
     );
   }
 }
