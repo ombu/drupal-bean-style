@@ -9,7 +9,18 @@ class CarouselBeanStyle extends ListBeanStyle {
   protected $type = 'carousel';
   protected $theme_function = 'bean_style_carousel';
   protected $display_mode = 'grid';
-  protected $image_style = 'bootstrap_slideshow';
+  protected $image_style = FALSE;
+
+  /**
+   * Constructor.
+   */
+  public function __construct($info) {
+    parent::__construct($info);
+
+    if (!$this->image_style) {
+      $this->image_style = variable_get('bean_style_carousel_image_style', 'bootstrap_slideshow');
+    }
+  }
 
   /**
    * Implements parent::prepareView().
@@ -19,7 +30,7 @@ class CarouselBeanStyle extends ListBeanStyle {
 
     $type = $this->bean->type;
     switch ($type) {
-      case 'ombuslide':
+      case 'ombugallery':
         $build['field_slide'] = array(
           '#theme' => $this->theme_function,
           '#items' => $this->items,
@@ -40,7 +51,7 @@ class CarouselBeanStyle extends ListBeanStyle {
 
     // Build items differently depending on bean type.
     switch ($type) {
-      case 'ombuslide':
+      case 'ombugallery':
         $this->prepareFieldCollectionItems($build);
         break;
     }
@@ -54,14 +65,8 @@ class CarouselBeanStyle extends ListBeanStyle {
       $fid = key($build['field_slide'][$delta]['entity']['field_collection_item']);
       $item =& $build['field_slide'][$delta]['entity']['field_collection_item'][$fid];
 
-      if (isset($item['field_image'])) {
-        $item['field_image'][0]['#image_style'] = $this->image_style;
-      }
-
-      $link = field_get_items('field_collection_item', $item['#entity'], 'field_link');
-      if ($link) {
-        $item['field_image'][0]['#prefix'] = '<a href="' . $link[0]['url'] . '">';
-        $item['field_image'][0]['#suffix'] = '</a>';
+      if (isset($item['field_media'])) {
+        $item['field_media'][0]['file']['#image_style'] = $this->image_style;
       }
 
       $this->items[] = $build['field_slide'][$delta];

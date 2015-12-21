@@ -1,16 +1,16 @@
 (function ($) {
-  Drupal.behaviors.ombuslide = {
+  Drupal.behaviors.ombugallery = {
     attach: function(context, settings) {
 
-      $('.ombuslide-slideshow:not(.ombuslide-processed)', context)
+      $('.ombugallery-slideshow:not(.ombugallery-processed)', context)
         .each(function(i, el) {
           var $slideshow = $(el);
           if ($slideshow.find('> .slides > li').length > 1) {
-            var settings = $.parseJSON($slideshow.attr('data-ombuslide-settings'));
+            var settings = $.parseJSON($slideshow.attr('data-ombugallery-settings'));
             new Drupal.slideshow($slideshow, settings);
           }
         })
-        .addClass('ombuslide-processed');
+        .addClass('ombugallery-processed');
 
     }
   }

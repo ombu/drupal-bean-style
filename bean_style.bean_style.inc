@@ -14,14 +14,14 @@ function bean_style_bean_style_info() {
       'label'          => 'Bootstrap Slider',
       'class'          => 'BootstrapSlideshowBeanStyle',
       'bean_types'     => array(
-        'ombuslide',
+        'ombugallery',
       ),
     ),
     'slideshow' => array(
       'label'          => 'Slider',
       'class'          => 'SlideshowBeanStyle',
       'bean_types'     => array(
-        'ombuslide',
+        'ombugallery',
       ),
     ),
     'grid' => array(
@@ -29,7 +29,7 @@ function bean_style_bean_style_info() {
       'class'          => 'GridBeanStyle',
       'bean_types'     => array(
         'solr_bean',
-        'featuredbean',
+        'bean_featured',
       ),
     ),
     'list' => array(
@@ -37,7 +37,7 @@ function bean_style_bean_style_info() {
       'class'          => 'ListBeanStyle',
       'bean_types'     => array(
         'solr_bean',
-        'featuredbean',
+        'bean_featured',
         'ombubeans_popular_content',
       ),
     ),
@@ -46,7 +46,7 @@ function bean_style_bean_style_info() {
       'class'          => 'LinkedListBeanStyle',
       'bean_types'     => array(
         'solr_bean',
-        'featuredbean',
+        'bean_featured',
         'ombubeans_popular_content',
         'ombublog_list',
       ),
@@ -56,8 +56,8 @@ function bean_style_bean_style_info() {
       'class'          => 'CarouselBeanStyle',
       'bean_types'     => array(
         'solr_bean',
-        'featuredbean',
-        'ombuslide',
+        'bean_featured',
+        'ombugallery',
       ),
     ),
   );
@@ -67,7 +67,7 @@ function bean_style_bean_style_info() {
  * Implements hook_bean_style_options_alter().
  */
 function bean_style_bean_style_options_alter(&$options, $context) {
-  if ($context['bundle'] == 'ombuslide') {
+  if ($context['bundle'] == 'ombugallery') {
     // Remove default option for slideshows, since we always want a slideshow
     // style displayed.
     unset($options['']);
@@ -78,7 +78,7 @@ function bean_style_bean_style_options_alter(&$options, $context) {
       unset($options['bootstrap_slideshow']);
     }
   }
-  elseif ($context['bundle'] == 'featuredbean') {
+  elseif ($context['bundle'] == 'bean_featured') {
     // Remove default option for featured bean.
     unset($options['']);
   }

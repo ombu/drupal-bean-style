@@ -214,9 +214,27 @@
 .bean-style-carousel a {
   outline: 0;
 }
-.bean-style-carousel .owl-nav,
 .bean-style-carousel .owl-dots {
-  display: none;
+  position: absolute;
+  height: 30px;
+  width: 100%;
+  bottom: 0;
+  text-align: center;
+}
+.bean-style-carousel .owl-dots .owl-dot {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background: #fff;
+  opacity: .5;
+  border: 1px solid #fff;
+  display: inline-block;
+  margin: 0 14px 0 0;
+  position: relative;
+}
+.bean-style-carousel .owl-dots .owl-dot.active,
+.bean-style-carousel .owl-dots .owl-dot:hover {
+  opacity: .70;
 }
 .bean-style-carousel .owl-prev,
 .bean-style-carousel .owl-next {

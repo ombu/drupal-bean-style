@@ -22,7 +22,7 @@ function theme_bean_style_bootstrap_slideshow($variables) {
 
   // Generate the parent list element, the corresponding pager list, and
   // previous/next links.
-  $id_slides = drupal_html_id('ombuslide-slides');
+  $id_slides = drupal_html_id('ombugallery-slides');
 
   // Otherwise, build up the slide items and their associated pager links.
   $items = '';

@@ -22,7 +22,7 @@ class LinkedListBeanStyle extends ListBeanStyle {
    */
   protected function prepareFeaturedItems($build) {
     foreach ($build['#featured_content'] as $content) {
-      $this->items[] = $this->prepareLinkTheme('node/' . $content['entity']->nid, $content['entity']->title, 'featured', $build['entity']);
+      $this->items[] = $this->prepareLinkTheme('node/' . $content['entity']->nid, $content['entity']->title, 'featured', $content['entity']);
     }
   }
 
@@ -46,6 +46,7 @@ class LinkedListBeanStyle extends ListBeanStyle {
       '#entity' => $entity,
       '#text' => $title,
       '#path' => $path,
+      '#type' => $type,
     );
   }
 }
