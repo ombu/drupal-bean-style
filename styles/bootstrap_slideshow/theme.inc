@@ -47,7 +47,7 @@ function theme_bean_style_bootstrap_slideshow($variables) {
     $collection =& $item['data']['entity']['field_collection_item'][$fid];
 
     // Set image style.
-    $collection['field_image'][0]['#image_style'] = 'bootstrap_slideshow';
+    $collection['field_media'][0]['#image_style'] = 'bootstrap_slideshow';
 
     $attributes = array(
       'class' => array(
@@ -59,7 +59,7 @@ function theme_bean_style_bootstrap_slideshow($variables) {
     }
 
     $item = '<div ' . drupal_attributes($attributes) . '>';
-    $item .= drupal_render($collection['field_image']);
+    $item .= drupal_render($collection['field_media']);
     $item .= '<div class="carousel-caption">';
     $item .= drupal_render($collection);
     $item .= '</div>';
