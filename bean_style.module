@@ -257,6 +257,7 @@ function bean_style_entity_info_alter(&$info) {
 function bean_style_view_alter(&$build, $bean) {
   $style = bean_style_bean_load_style($bean->bid);
   if ($style && $style->getStyle()) {
+    $bean->style = $style->type;
     $build['bean'][$bean->delta] = $style->getStyle()->prepareView($build['bean'][$bean->delta], $bean);
 
     $context = array(
