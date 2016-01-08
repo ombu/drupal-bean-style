@@ -18,6 +18,8 @@
     var obj = this;
     this.$bean = $bean;
     this.$items = $('> .items', this.$bean);
+    this.owlNav = true;
+    this.owlDots = true;
 
     // On Owl Carousel initialization and change events, determine position and
     // set bean classes to configure visibility of previous and next arrows.
@@ -41,10 +43,20 @@
       obj.$items.toggleClass('past-start', indexCurrent > 0);
     });
 
+    // Convert nav and dots data attributes to boolean values.
+    if (typeof this.$items.attr('data-nav') !== 'undefined') {
+      console.log(this.$items.attr('data-nav'));
+      this.owlNav = (this.$items.attr('data-nav') === 'true');
+    }
+
+    if (typeof this.$items.attr('data-dots') !== 'undefined') {
+      this.owlDots = (this.$items.attr('data-dots') === 'true');
+    }
+
     // Instantiate Owl Carousel.
     this.owl = this.$items.owlCarousel({
-      nav: true,
-      dots: true,
+      nav: this.owlNav,
+      dots: this.owlDots,
       items: this.$items.attr('data-items') || 3,
       margin: this.$items.attr('data-margin') || 10,
       stagePadding: this.$items.attr('data-stage-padding') || 40,
