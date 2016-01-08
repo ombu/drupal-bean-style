@@ -9,6 +9,22 @@
       $carousels.each(function(i, el) {
         new Drupal.beanStyleCarousel($(el));
       });
+    },
+
+    getDataBoolean: function(obj, name, value) {
+      if (typeof obj.$items.attr(name) !== 'undefined') {
+        return (obj.$items.attr(name) === 'true');
+      } else {
+        return value;
+      }
+    },
+
+    getDataInt: function(obj, name, value) {
+      if (typeof obj.$items.attr(name) !== 'undefined') {
+        return parseInt(obj.$items.attr(name));
+      } else {
+        return value;
+      }
     }
   };
 
@@ -18,8 +34,8 @@
     var obj = this;
     this.$bean = $bean;
     this.$items = $('> .items', this.$bean);
-    this.owlNav = true;
-    this.owlDots = true;
+    this.getDataInt = Drupal.behaviors.beanStyleCarousel.getDataInt;
+    this.getDataBoolean = Drupal.behaviors.beanStyleCarousel.getDataBoolean;
 
     // On Owl Carousel initialization and change events, determine position and
     // set bean classes to configure visibility of previous and next arrows.
@@ -43,38 +59,28 @@
       obj.$items.toggleClass('past-start', indexCurrent > 0);
     });
 
-    // Convert nav and dots data attributes to boolean values.
-    if (typeof this.$items.attr('data-nav') !== 'undefined') {
-      console.log(this.$items.attr('data-nav'));
-      this.owlNav = (this.$items.attr('data-nav') === 'true');
-    }
-
-    if (typeof this.$items.attr('data-dots') !== 'undefined') {
-      this.owlDots = (this.$items.attr('data-dots') === 'true');
-    }
-
     // Instantiate Owl Carousel.
     this.owl = this.$items.owlCarousel({
-      nav: this.owlNav,
-      dots: this.owlDots,
-      items: this.$items.attr('data-items') || 3,
-      margin: this.$items.attr('data-margin') || 10,
-      stagePadding: this.$items.attr('data-stage-padding') || 40,
+      nav: this.getDataBoolean(this, 'data-nav', true),
+      dots: this.getDataBoolean(this, 'data-dots', true),
+      items: this.getDataInt(this, 'data-items', 3),
+      margin: this.getDataInt(this, 'data-margin', 10),
+      stagePadding: this.getDataInt(this, 'data-stage-padding', 40),
       responsive: {
         480: {
-          items: this.$items.attr('data-items-480') || 4,
-          margin: this.$items.attr('data-margin-480') || 20,
-          stagePadding: this.$items.attr('data-stage-padding-480') || 40,
+          items: this.getDataInt(this, 'data-items-480', 4),
+          margin: this.getDataInt(this, 'data-margin-480', 20),
+          stagePadding: this.getDataInt(this, 'data-stage-padding-480', 40),
         },
         768: {
-          items: this.$items.attr('data-items-768') || 5,
-          margin: this.$items.attr('data-margin-768') || 20,
-          stagePadding: this.$items.attr('data-stage-padding-768') || 60,
+          items: this.getDataInt(this, 'data-items-768', 5),
+          margin: this.getDataInt(this, 'data-margin-768', 20),
+          stagePadding: this.getDataInt(this, 'data-stage-padding-768', 60),
         },
         992: {
-          items: this.$items.attr('data-items-992') || 6,
-          margin: this.$items.attr('data-margin-992') || 20,
-          stagePadding: this.$items.attr('data-stage-padding-992') || 0,
+          items: this.getDataInt(this, 'data-items-992', 6),
+          margin: this.getDataInt(this, 'data-margin-992', 20),
+          stagePadding: this.getDataInt(this, 'data-stage-padding-992', 0),
         }
       }
     });
