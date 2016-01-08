@@ -41,10 +41,7 @@ class GridBeanStyle extends ListBeanStyle {
    */
   protected function prepareGalleryItems($build) {
     foreach (element_children($build['field_slide']) as $delta) {
-      $this->items[] = array(
-        'data' => $build['field_slide'][$delta],
-        'class' => array('item-' . $delta),
-      );
+      $this->items[] = $build['field_slide'][$delta];
     }
   }
 }
