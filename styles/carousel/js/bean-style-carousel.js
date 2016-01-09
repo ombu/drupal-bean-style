@@ -12,16 +12,16 @@
     },
 
     getDataBoolean: function(obj, name, value) {
-      if (typeof obj.$items.attr(name) !== 'undefined') {
-        return (obj.$items.attr(name) === 'true');
+      if (typeof obj.$carousel.attr(name) !== 'undefined') {
+        return (obj.$carousel.attr(name) === 'true');
       } else {
         return value;
       }
     },
 
     getDataInt: function(obj, name, value) {
-      if (typeof obj.$items.attr(name) !== 'undefined') {
-        return parseInt(obj.$items.attr(name));
+      if (typeof obj.$carousel.attr(name) !== 'undefined') {
+        return parseInt(obj.$carousel.attr(name));
       } else {
         return value;
       }
@@ -33,17 +33,27 @@
     // Get assorted handles.
     var obj = this;
     this.$bean = $bean;
-    this.$items = $('> .items', this.$bean);
+    this.$carousel = $('> .items', this.$bean);
+    this.$items = null;
+    this.$clones = null;
+    this.count = 0;
     this.getDataInt = Drupal.behaviors.beanStyleCarousel.getDataInt;
     this.getDataBoolean = Drupal.behaviors.beanStyleCarousel.getDataBoolean;
 
+    // Store some constants after Owl Carousel has initialized.
+    this.$carousel.on('initialized.owl.carousel', function(event) {
+      obj.$items = $('.owl-item', this.$carousel);
+      obj.$clones = $('.owl-item.cloned', this.$carousel);
+      obj.count = event.item.count;
+    });
+
     // On Owl Carousel initialization and change events, determine position and
     // set bean classes to configure visibility of previous and next arrows.
-    this.$bean.on('change.owl.carousel refreshed.owl.carousel', function(e) {
+    this.$carousel.on('change.owl.carousel refreshed.owl.carousel', function(e) {
       var $items = $(e.target).find('.owl-item');
       var numVisible = parseInt(e.page.size);
       var indexCurrent = e.hasOwnProperty('property') ? parseInt(e.property.value) : 0;
-      var indexLast = e.item.count - 1;
+      var indexLast = obj.count - 1;
       var indexLastVisible = indexCurrent + (numVisible - 2);
 
       // If there's a neighbor to the right of the last visible item, consider
@@ -54,13 +64,48 @@
 
       // Is the user at either end of the carousel?  If so, hide the previous
       // and/or next links as needed.
-      obj.$items.toggleClass('at-start', indexCurrent <= 0);
-      obj.$items.toggleClass('at-end', indexLastVisible >= indexLast);
-      obj.$items.toggleClass('past-start', indexCurrent > 0);
+      obj.$carousel.toggleClass('at-start', indexCurrent <= 0);
+      obj.$carousel.toggleClass('at-end', indexLastVisible >= indexLast);
+      obj.$carousel.toggleClass('past-start', indexCurrent > 0);
+    });
+
+    // In the case of looping carousels, Owl Carousel will clone the items and
+    // then control their layering during transitions.  If the theme desires
+    // inactive (e.g., translucent) states on entering or exiting items, these
+    // clones need to be targeted manually.
+    this.$carousel.on('translate.owl.carousel initialized.owl.carousel', function(event) {
+      var indexBefore = event.item.index - obj.count;
+      var indexAfter = event.item.index + obj.count;
+
+      // If a clone of the active item is present before it, mark it active.
+      if (indexBefore >= 0) {
+        var $clone = obj.$items.eq(indexBefore);
+        $clone.addClass('active-clone');
+        obj.$clones.not($clone).removeClass('active-clone');
+      }
+
+      // If a clone of the active item is present after it, mark it active.
+      if (indexAfter <= obj.$items.length) {
+        var $clone = obj.$items.eq(indexAfter);
+        $clone.addClass('active-clone');
+        obj.$clones.not($clone).removeClass('active-clone');
+      }
+    });
+
+    // If an off-canvas element is tapped, trigger a next or previous transition
+    // on the carousel rather than allowing the link to be traveled.
+    this.$carousel.on('click', 'a', function(e) {
+      var $owlItem = $(this).closest('.owl-item');
+      if (!$owlItem.hasClass('active')) {
+        e.preventDefault();
+        e.stopPropagation();
+        var trigger = $owlItem.next().hasClass('active') ? 'prev' : 'next';
+        obj.owl.trigger(trigger + '.owl.carousel');
+      }
     });
 
     // Instantiate Owl Carousel.
-    this.owl = this.$items.owlCarousel({
+    this.owl = this.$carousel.owlCarousel({
       items: this.getDataInt(this, 'data-items', 3),
       nav: this.getDataBoolean(this, 'data-nav', true),
       dots: this.getDataBoolean(this, 'data-dots', true),
@@ -87,18 +132,6 @@
           margin: this.getDataInt(this, 'data-margin-992', 20),
           stagePadding: this.getDataInt(this, 'data-stage-padding-992', 0),
         }
-      }
-    });
-
-    // If an off-canvas element is tapped, trigger a next or previous transition
-    // on the carousel rather than allowing the link to be traveled.
-    this.$items.on('click', 'a', function(e) {
-      var $owlItem = $(this).closest('.owl-item');
-      if (!$owlItem.hasClass('active')) {
-        e.preventDefault();
-        e.stopPropagation();
-        var trigger = $owlItem.next().hasClass('active') ? 'prev' : 'next';
-        obj.owl.trigger(trigger + '.owl.carousel');
       }
     });
   }
