@@ -61,10 +61,15 @@
 
     // Instantiate Owl Carousel.
     this.owl = this.$items.owlCarousel({
+      items: this.getDataInt(this, 'data-items', 3),
       nav: this.getDataBoolean(this, 'data-nav', true),
       dots: this.getDataBoolean(this, 'data-dots', true),
-      items: this.getDataInt(this, 'data-items', 3),
       margin: this.getDataInt(this, 'data-margin', 10),
+      loop: this.getDataBoolean(this, 'data-loop', false),
+      autoplay: this.getDataBoolean(this, 'data-autoplay', false),
+      autoplayTimeout: this.getDataInt(this, 'data-autoplay-timeout', 6000),
+      smartSpeed: this.getDataInt(this, 'data-smart-speed', 500),
+      mouseDrag: this.getDataBoolean(this, 'data-mouse-drag', true),
       stagePadding: this.getDataInt(this, 'data-stage-padding', 40),
       responsive: {
         480: {
