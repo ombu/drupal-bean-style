@@ -85,14 +85,14 @@
       if (indexBefore >= 0) {
         var $clone = obj.$items.eq(indexBefore);
         $clone.addClass('active-clone');
-        obj.$clones.not($clone).removeClass('active-clone');
+        obj.$items.not($clone).removeClass('active-clone');
       }
 
       // If a clone of the active item is present after it, mark it active.
       if (indexAfter <= obj.$items.length) {
         var $clone = obj.$items.eq(indexAfter);
         $clone.addClass('active-clone');
-        obj.$clones.not($clone).removeClass('active-clone');
+        obj.$items.not($clone).removeClass('active-clone');
       }
     });
 
