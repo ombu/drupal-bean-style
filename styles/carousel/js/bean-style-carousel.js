@@ -120,6 +120,7 @@
       smartSpeed: this.getDataInt(this, 'data-smart-speed', 500),
       mouseDrag: this.getDataBoolean(this, 'data-mouse-drag', true),
       stagePadding: this.getDataInt(this, 'data-stage-padding', 40),
+      responsiveRefreshRate: 0,
       responsive: {
         480: {
           items: this.getDataInt(this, 'data-items-480', 4),
