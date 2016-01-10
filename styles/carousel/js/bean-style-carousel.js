@@ -33,7 +33,7 @@
     // Get assorted handles.
     var obj = this;
     this.$bean = $bean;
-    this.$carousel = $('> .items', this.$bean);
+    this.$carousel = $('> .carousel > .items', this.$bean);
     this.$items = null;
     this.$clones = null;
     this.count = 0;
@@ -45,6 +45,10 @@
       obj.$items = $('.owl-item', this.$carousel);
       obj.$clones = $('.owl-item.cloned', this.$carousel);
       obj.count = event.item.count;
+
+      setTimeout(function() {
+        obj.$bean.addClass('initialized');
+      }, 0);
     });
 
     // On Owl Carousel initialization and change events, determine position and
