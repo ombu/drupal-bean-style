@@ -96,6 +96,13 @@
       }
     });
 
+    // Mark the active item when it concludes translation and arrives in place.
+    this.$carousel.on('translated.owl.carousel', function() {
+      var $active = obj.$items.filter('.active, .active-clone');
+      obj.$items.removeClass('translated');
+      $active.addClass('translated');
+    });
+
     // If an off-canvas element is tapped, trigger a next or previous transition
     // on the carousel rather than allowing the link to be traveled.
     this.$carousel.on('click', 'a', function(e) {
