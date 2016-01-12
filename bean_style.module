@@ -194,6 +194,11 @@ function bean_style_form_bean_form_alter(&$form, $form_state) {
       '#options' => $options,
       '#default_value' => !empty($bean_style) ? $bean_style->type : '',
     );
+
+    // If there's only one style option, hide select box.
+    if (count($options) <= 1) {
+      $form['bean_style']['#access'] = FALSE;
+    }
   }
 }
 
