@@ -1,7 +1,7 @@
 name = Bean styles
 description = Universal styler for supported bean types
 dependencies[] = bean
-version = 7.x-0.4
+version = 7.x-0.5
 package = bean
 core = 7.x
 files[] = tests/bean_style.test
