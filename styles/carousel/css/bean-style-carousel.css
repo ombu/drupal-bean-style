@@ -287,6 +287,9 @@
   visibility: hidden;
   opacity: 0;
 }
+.bean-style-carousel .group_primary img {
+  display: block;
+}
 @media (min-width: 768px) {
   .bean-style-carousel {
     margin-left: -60px;

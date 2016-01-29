@@ -23,13 +23,13 @@ function theme_bean_style_carousel(&$variables) {
   $options .= ' data-items-992="4"';
 
   // Render markup for collection of items.
-  $list  = '<div class="bean-style-carousel">';
+  $list  = '<div class="bean-style-carousel"><div class="carousel">';
   $list .= '<div class="items"' . $options . '>';
   foreach ($variables['items'] as $item) {
     $render = array('data' => drupal_render($item));
     $list .= '<div class="item">' . $render['data'] . '</div>';
   }
-  $list .= "</div></div>";
+  $list .= "</div></div></div>";
 
   return $list;
 }

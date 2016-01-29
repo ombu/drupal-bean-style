@@ -105,13 +105,6 @@ function bean_style_hook_info() {
  */
 function bean_style_theme($existing, $type, $theme, $path) {
   return array(
-    'bean_style_bootstrap_slideshow' => array(
-      'variables' => array(
-        'items' => NULL,
-        'type' => NULL,
-      ),
-      'file' => 'styles/bootstrap_slideshow/theme.inc',
-    ),
     'bean_style_slideshow' => array(
       'variables' => array(
         'items' => NULL,
@@ -201,6 +194,11 @@ function bean_style_form_bean_form_alter(&$form, $form_state) {
       '#options' => $options,
       '#default_value' => !empty($bean_style) ? $bean_style->type : '',
     );
+
+    // If there's only one style option, hide select box.
+    if (count($options) <= 1) {
+      $form['bean_style']['#access'] = FALSE;
+    }
   }
 }
 
@@ -257,6 +255,7 @@ function bean_style_entity_info_alter(&$info) {
 function bean_style_view_alter(&$build, $bean) {
   $style = bean_style_bean_load_style($bean->bid);
   if ($style && $style->getStyle()) {
+    $bean->style = $style->type;
     $build['bean'][$bean->delta] = $style->getStyle()->prepareView($build['bean'][$bean->delta], $bean);
 
     $context = array(
@@ -351,26 +350,6 @@ function bean_style_get_styles() {
     // Allow other modules to alter bean styles.
     drupal_alter('bean_style', $styles);
   }
-
-  return $styles;
-}
-
-/**
- * Implements hook_image_default_styles().
- */
-function bean_style_image_default_styles() {
-  $styles = array();
-
-  $styles['bootstrap_slideshow'] = array(
-    'label' => 'Bootstrap Slideshow',
-    'effects' => array(
-      array(
-        'name' => 'image_scale_and_crop_center',
-        'data' => array('width' => 1200, 'height' => 600, 'upscale' => 0),
-        'weight' => 0,
-      ),
-    ),
-  );
 
   return $styles;
 }

@@ -18,7 +18,7 @@ class CarouselBeanStyle extends ListBeanStyle {
     parent::__construct($info);
 
     if (!$this->image_style) {
-      $this->image_style = variable_get('bean_style_carousel_image_style', 'bootstrap_slideshow');
+      $this->image_style = variable_get('bean_style_carousel_image_style', 'full');
     }
   }
 

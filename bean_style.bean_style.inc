@@ -30,6 +30,7 @@ function bean_style_bean_style_info() {
       'bean_types'     => array(
         'solr_bean',
         'bean_featured',
+        'ombugallery',
       ),
     ),
     'list' => array(
