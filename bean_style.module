@@ -205,6 +205,20 @@ function bean_style_form_bean_form_alter(&$form, $form_state) {
 }
 
 /**
+ * Implements hook_entity_load().
+ */
+function bean_style_entity_load(&$entities, $entity_type) {
+  if ($entity_type == 'bean') {
+    $results = db_query("SELECT bid, type FROM {bean_style} WHERE bid IN(:bids)", array(
+      ':bids' => array_keys($entities),
+    ));
+    foreach ($results as $result) {
+      $entities[$result->bid]->bean_style = $result->type;
+    }
+  }
+}
+
+/**
  * Implements hook_bean_insert().
  */
 function bean_style_bean_insert($bean) {
