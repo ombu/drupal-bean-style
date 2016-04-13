@@ -1,0 +1,2 @@
+The following patches have been applied:
+  - bean_style-owl_carousel_subpixel_fix-16172.patch
