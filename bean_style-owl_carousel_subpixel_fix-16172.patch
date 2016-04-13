@@ -1,0 +1,22 @@
+diff --git a/styles/carousel/js/vendor/owl.carousel.js b/styles/carousel/js/vendor/owl.carousel.js
+index e6c4dca..64ffd2b 100644
+--- a/styles/carousel/js/vendor/owl.carousel.js
++++ b/styles/carousel/js/vendor/owl.carousel.js
+@@ -306,7 +306,7 @@
+     filter: [ 'width', 'items', 'settings' ],
+     run: function() {
+       var rtl = (this.settings.rtl ? 1 : -1),
+-        width = (this.width() / this.settings.items).toFixed(3),
++        width = (this.width() / this.settings.items).toFixed(),
+         coordinate = 0, merge, i, n;
+ 
+       this._coordinates = [];
+@@ -321,7 +321,7 @@
+   }, {
+     filter: [ 'width', 'items', 'settings' ],
+     run: function() {
+-      var i, n, width = (this.width() / this.settings.items).toFixed(3), css = {
++      var i, n, width = (this.width() / this.settings.items).toFixed(), css = {
+         'width': Math.abs(this._coordinates[this._coordinates.length - 1]) + this.settings.stagePadding * 2,
+         'padding-left': this.settings.stagePadding || '',
+         'padding-right': this.settings.stagePadding || ''
