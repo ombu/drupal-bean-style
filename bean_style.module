@@ -198,6 +198,10 @@ function bean_style_form_bean_form_alter(&$form, $form_state) {
     // If there's only one style option, hide select box.
     if (count($options) <= 1) {
       $form['bean_style']['#access'] = FALSE;
+
+      if (empty($form['bean_style']['#default_value'])) {
+        $form['bean_style']['#default_value'] = key($options);
+      }
     }
   }
 }
