@@ -1,0 +1,30 @@
+diff --git a/styles/list/ListBeanStyle.php b/styles/list/ListBeanStyle.php
+index f447a2b..711517d 100644
+--- a/styles/list/ListBeanStyle.php
++++ b/styles/list/ListBeanStyle.php
+@@ -23,7 +23,7 @@ class ListBeanStyle extends BeanStyle {
+ 
+   /**
+    * Items used to render into list style.
+-   * 
++   *
+    */
+   protected $items = array();
+ 
+@@ -41,6 +41,16 @@ class ListBeanStyle extends BeanStyle {
+         $build['search']['search_results']['#items'] = $this->items;
+         $build['search']['search_results']['#type']  = $this->type;
+         $build['search']['#weight'] = -1;
++
++        // Add pager if selected for solr bean.
++        if (!empty($bean->settings['pager'])) {
++         $build['search']['pager'] = array(
++           '#theme' => 'pager',
++           '#element' => $bean->settings['pager_element'],
++           '#weight' => 100,
++         );
++        }
++        
+         break;
+ 
+       case 'featuredbean':
